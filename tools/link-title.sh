@@ -36,6 +36,8 @@ objects=() archives=() flags=()
 for arg in "$@"; do
     case $arg in
         *.o) objects+=("$arg") ;;
+        # RADV's archive (linked whole) carries zlib 1.3.1: the title takes its copy
+        */libz.a) ;;
         *.a) archives+=("$arg") ;;
         -Wl,*) IFS=',' read -r -a parts <<<"${arg#-Wl,}"; flags+=("${parts[@]}") ;;
         -l* | -L* | -march=* | -O* | -g* | -f* | -D* | --sysroot=*) ;;
@@ -59,7 +61,14 @@ stub libSceAgcDriver vendor/ps5/sdk/stubs/agc_driver_canary_link_stub.c
 source "$vulkan/tools/radv-link.sh"
 radv_link_recipe "$vulkan" "$sdk" "$archive" || exit 2
 
-"$sdk/bin/prospero-lld" "${radv_linker_script[@]}" --eh-frame-hdr "${radv_link_flags[@]}" \
+# A title publishes no exports: lld would otherwise export the definitions that also have a
+# name in the SDK's stub modules (the ps5_* bindings, __wrap_getcwd, the libc shims)
+printf '{\n    local: *;\n};\n' > "$work/title-local.map"
+radv_link_flags+=(--version-script "$work/title-local.map")
+
+# Weak references nothing defines (C++ thread_local init hooks, _ZTH*) resolve to 0 in the
+# title rather than becoming imports no module exports
+"$sdk/bin/prospero-lld" --error-limit=0 -z nodynamic-undefined-weak "${radv_linker_script[@]}" --eh-frame-hdr "${radv_link_flags[@]}" \
     "${flags[@]}" \
     --version-script "$native/app-symbols.map" --exclude-libs=ALL \
     -e _start -o "$work/llvm-pie.elf" \
