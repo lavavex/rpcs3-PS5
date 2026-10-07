@@ -2,7 +2,7 @@
 
 | Component | Where | Revision |
 | --- | --- | --- |
-| RPCS3 (branch ps5 = master 55a3aff33 + PR #19444 831a8af33) | src/rpcs3 | 71df2b02f |
+| RPCS3 (branch ps5 = upstream master 55a3aff33 + PS5 port; PR #19444 dropped, kept as ps5-pr19444) | src/rpcs3 | 6980a2c87 |
 | PS5_LLVM (RPCS3's LLVM ca7933e4 + 2 PS5 ABI fixes) | deps/PS5_LLVM | be5b58f51c93 |
 | PS5_PayloadSDK (RPCS3 SDK, installed to deps/sdk-rpcs3) | deps/PS5_PayloadSDK | b5efad5 |
 | PS5_Vulkan (RADV link recipe) | deps/PS5_Vulkan | 5b5e4fc |
