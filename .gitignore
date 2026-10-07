@@ -1,8 +1,12 @@
-# Large or reproducible trees: pinned in PINS.md, not committed
+# Large or reproducible trees: pinned in PINS.md, not committed (src/rpcs3 is a submodule)
 /build/
 /deps/
-/src/
+/src/*
+!/src/rpcs3
 /sdk/
 /test-content/
 /dist/
 /official/
+# A copy of mihawk-99's withdrawn port notes, kept locally only
+/docs/RPCS3_PORT_prior_art.md
+/env.sh

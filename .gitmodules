@@ -1,0 +1,4 @@
+[submodule "src/rpcs3"]
+	path = src/rpcs3
+	url = https://github.com/lavavex/rpcs3.git
+	branch = ps5

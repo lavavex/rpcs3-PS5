@@ -1,7 +1,7 @@
 # PS5 memory model: notes for the RPCS3 port
 
 Taken from Swordpdf/PS5SX2 (`deps/PS5SX2`, commit 9183fda) and mihawk-99's RPCS3 port spec
-(`docs/RPCS3_PORT_prior_art.md`). These notes feed Phase 3 (`rpcs3/util/vm_native.cpp`,
+(`docs/RPCS3_PORT.md` in mihawk-99/PS5_RetroArch at a655e10b, since withdrawn). These notes feed Phase 3 (`rpcs3/util/vm_native.cpp`,
 `Utilities/Thread.cpp`).
 
 ## Rules from PS5SX2

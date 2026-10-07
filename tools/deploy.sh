@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Upload the RPCS3 title folder (dist/<TITLE_ID>) to the console's /data/homebrew over FTP.
 # ShadowMount+ installs a new folder within ~15 s (restart its payload if its scanner hangs).
-#   PS5_HOST (default 192.168.1.100), FTP_PORT (default 2121)
+#   PS5_HOST=<console ip> (required), FTP_PORT (default 2121)
 set -euo pipefail
 root=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
-host=${PS5_HOST:-192.168.1.100}
+host=${PS5_HOST:?set PS5_HOST to the console's IP address}
 port=${FTP_PORT:-2121}
 title_id=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["titleId"])' "$root/title/sce_sys/param.json")
 app="$root/dist/$title_id"
