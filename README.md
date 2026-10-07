@@ -29,6 +29,15 @@ Build it yourself, for your own console.
 Tested on a PS5 Pro, firmware 13.60, with the Relapse jailbreak, etaHEN, ftpsrv and
 ShadowMount+. Need for Speed Carbon (BLUS30016) is fully playable.
 
+## Screenshots
+
+Captured over Remote Play on a PS5 Pro (Need for Speed Carbon, BLUS30016).
+
+| | |
+| --- | --- |
+| ![The RPCS3 title on the PS5 home screen](media/ps5-home-screen.jpg) | ![RPCS3 compiling Carbon's PPU and SPU code on first launch](media/carbon-compiling.jpg) |
+| ![Carbon cutscene](media/carbon-gameplay-1.jpg) | ![Carbon gameplay at 60 fps with the performance overlay](media/carbon-gameplay-2.jpg) |
+
 ## What you need
 
 - An Arch/CachyOS host (others work if you install the equivalents):

@@ -13,3 +13,5 @@
 # Home-screen backgrounds made from your own art (PS3 wave frames are Sony's): see README
 /title/sce_sys/pic0.dds
 /title/sce_sys/pic1.dds
+# Large recordings stay local (the README uses stills from them)
+/media/*.mp4
