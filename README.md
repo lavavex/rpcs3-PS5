@@ -107,6 +107,20 @@ Settings, logs and caches live in `/data/rpcs3/` (log: `/data/rpcs3/cache/RPCS3.
 To boot one game straight away, write its path (or a `.pkg` to install) into
 `/data/rpcs3/boot.txt`.
 
+## Known issues
+
+- **Few games tested.** Need for Speed Carbon (BLUS30016) plays at 60 fps. inFAMOUS (BCUS98119)
+  plays, but stutters and runs below full speed in places. Nothing else has been tried yet.
+- **The first launch of a game is slow.** RPCS3 compiles the game's PPU and SPU code and its
+  shaders, and stutters while it does. The caches in `/data/rpcs3/cache` make later launches
+  faster.
+- **No video previews.** A game's details page in Big Picture Mode shows its icon, not its
+  preview video.
+- **The CPU usage in RPCS3's log is wrong** (a constant 6.3%): the PS5 does not report process
+  CPU time. The performance overlay's PPU/SPU/RSX figures are correct.
+- **A crash or freeze closes the title** without a message. The reason is in
+  `/data/rpcs3/cache/RPCS3.log` (copy it off before relaunching: each launch replaces it).
+
 ## Layout
 
 | Path | What |
