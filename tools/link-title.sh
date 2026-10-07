@@ -116,6 +116,24 @@ mkdir -p "$app/Icons" "$app/patches"
 cp -a "$src/Icons/ui" "$app/Icons/" 2>/dev/null || true
 cp "$src"/patches/*.yml "$app/patches/" 2>/dev/null || true
 
+# RPCS3's per-game recommended settings (tools/update-config-database.sh), one YAML file per
+# title so the frontend needs no JSON parser: game_configs/<TITLE_ID>.yml
+if [[ -f $root/deps/config_database.json ]]; then
+    rm -rf "$app/game_configs"
+    mkdir -p "$app/game_configs"
+    python3 - "$root/deps/config_database.json" "$app/game_configs" <<'PY'
+import json, os, re, sys
+games = json.load(open(sys.argv[1]))["games"]
+n = 0
+for serial, entry in games.items():
+    config = entry.get("config") if isinstance(entry, dict) else None
+    if config and re.fullmatch(r"[A-Z0-9]{9}", serial):
+        open(os.path.join(sys.argv[2], serial + ".yml"), "w").write(config)
+        n += 1
+print(f"game_configs: {n} titles")
+PY
+fi
+
 # CMake's output is the unsigned ELF, for symbolising crashes
 cp "$work/llvm-pie.elf" "$out"
 printf '==> %s: %s (eboot.bin %s bytes)\n' "$title_id" "$app" "$(stat -c %s "$app/eboot.bin")"
