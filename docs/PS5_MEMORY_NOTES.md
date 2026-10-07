@@ -60,7 +60,7 @@ GPU allocations all come out of direct memory.
 
 - The SDK's `prospero-clang` wrapper always passes **`-femulated-tls`**. Every `thread_local` access
   therefore goes through `__emutls_get_address`, a function call plus a lookup.
-- PR #19444 turns `vm::g_base_addr`, `g_sudo_addr`, `g_exec_addr`, `g_hook_addr`, `g_stat_addr`,
+- (No longer applies: PR #19444 was dropped on 2026-10-06 and the port is on plain upstream, where these are ordinary globals. Kept for reference.) PR #19444 turned `vm::g_base_addr`, `g_sudo_addr`, `g_exec_addr`, `g_hook_addr`, `g_stat_addr`,
   `g_vm_image`, `g_tls_locked` and `rsx::method_registers` into `thread_local` variables, and
   `vm::_ptr`, `vm::_ref` and `vm::read/write` dereference `g_base_addr` on every guest access in
   HLE, interpreter and RSX code. Recompiled PPU/SPU code takes the base from a register, so it is
