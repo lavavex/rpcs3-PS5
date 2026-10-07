@@ -36,7 +36,7 @@ Captured over Remote Play on a PS5 Pro (Need for Speed Carbon, BLUS30016).
 | | |
 | --- | --- |
 | ![The RPCS3 title on the PS5 home screen](media/ps5-home-screen.jpg) | ![RPCS3 compiling Carbon's PPU and SPU code on first launch](media/carbon-compiling.jpg) |
-| ![Carbon cutscene](media/carbon-gameplay-1.jpg) | ![Carbon gameplay at 60 fps with the performance overlay](media/carbon-gameplay-2.jpg) |
+| ![Carbon's main menu](media/carbon-main-menu.jpg) | ![Carbon gameplay at 60 fps with the performance overlay](media/carbon-gameplay.jpg) |
 
 ## What you need
 
@@ -57,7 +57,7 @@ Captured over Remote Play on a PS5 Pro (Need for Speed Carbon, BLUS30016).
 ## Building
 
 ```bash
-git clone --recursive https://github.com/lavavex/rpcs3-PS5.git
+git clone https://github.com/lavavex/rpcs3-PS5.git
 cd rpcs3-PS5
 tools/bootstrap.sh
 ```
