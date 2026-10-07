@@ -116,7 +116,7 @@ To boot one game straight away, write its path (or a `.pkg` to install) into
 | `tools/link-title.sh` | Links the title with RADV and signs `eboot.bin` |
 | `title/sce_sys` | Title metadata (`PPSA99300`) and icon |
 | `docs/` | Notes on the PS5 memory model |
-| `PINS.md` | Pinned revisions of every dependency |
+| `PINS.md` | Pinned revisions of every dependency, and how to update them (`tools/sync-forks.sh`) |
 
 ## Credits
 

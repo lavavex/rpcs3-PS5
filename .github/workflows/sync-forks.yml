@@ -1,0 +1,27 @@
+# Weekly: fast-forward lavavex's dependency forks (and RPCS3 master) from upstream and
+# report new upstream commits after the pins (tools/sync-forks.sh). Pins never move here.
+#
+# Needs a repository secret FORK_SYNC_TOKEN: a fine-grained token for lavavex with
+# Contents read/write on PS5_Vulkan, PS5_Mesa, PS5_PayloadSDK, PS5_LLVM and rpcs3
+# (the built-in GITHUB_TOKEN cannot write to other repositories).
+name: Sync dependency forks
+
+on:
+  schedule:
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sync forks and report
+        env:
+          GH_TOKEN: ${{ secrets.FORK_SYNC_TOKEN }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "FORK_SYNC_TOKEN is not set: nothing synced" | tee -a "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          { echo '```'; bash tools/sync-forks.sh; echo '```'; } | tee -a "$GITHUB_STEP_SUMMARY"
