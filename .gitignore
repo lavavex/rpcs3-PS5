@@ -10,3 +10,6 @@
 # A copy of mihawk-99's withdrawn port notes, kept locally only
 /docs/RPCS3_PORT_prior_art.md
 /env.sh
+# Home-screen backgrounds made from your own art (PS3 wave frames are Sony's): see README
+/title/sce_sys/pic0.dds
+/title/sce_sys/pic1.dds

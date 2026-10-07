@@ -1,5 +1,20 @@
 # rpcs3-PS5
 
+> [!CAUTION]
+> **EXPERIMENTAL. EXPECT CRASHES, FREEZES AND BROKEN GAMES.**
+>
+> This is an early, unofficial port, tested on a single console with a handful of games.
+> It is **not** supported by the RPCS3 team: do not report problems with it to them.
+>
+> - Most games are untested; many will crash back to the PS5 home screen or freeze.
+> - It runs as a homebrew title on a jailbroken console. Jailbreaks, payloads and
+>   unsigned titles carry their own risks; you use all of this **at your own risk**.
+> - Back up anything on `/data/rpcs3/` (saves, settings) that you care about.
+
+> [!WARNING]
+> **Source only, personal use only.** Never share built `eboot.bin`/title folders,
+> firmware, keys or games. The licenses involved forbid it (below).
+
 Build scripts for running [RPCS3](https://rpcs3.net) (the PlayStation 3 emulator) as a
 native title on a jailbroken PS5. RPCS3 renders through Vulkan on
 [PS5_Vulkan](https://github.com/mihawk-99/PS5_Vulkan)'s RADV port, plays audio through
@@ -74,6 +89,10 @@ Put these in `/data/rpcs3/` on the console over FTP:
 
 RPCS3 opens in Big Picture Mode with your games listed. Players 1–4 are the DualSenses of
 the signed-in users. Options + touchpad acts as the PS button.
+
+For a custom home-screen background, convert a 16:9 image with
+`deps/PS5_Vulkan/tools/prepare-assets.sh --background <image> --output-directory title/sce_sys`
+and rebuild; `pic0.dds`/`pic1.dds` stay out of git.
 
 Settings, logs and caches live in `/data/rpcs3/` (log: `/data/rpcs3/cache/RPCS3.log`).
 To boot one game straight away, write its path (or a `.pkg` to install) into
