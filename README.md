@@ -39,8 +39,8 @@ ShadowMount+. Need for Speed Carbon (BLUS30016) is fully playable.
     spirv-llvm-translator libclc spirv-headers python-ply
   ```
 
-- About 60 GB of disk space and a few hours for the first build (LLVM and RADV are the
-  slow parts).
+- About 20 GB of disk space. A first build takes about 10 minutes on a 16-core
+  desktop (LLVM and RADV are the slow parts); expect longer on smaller machines.
 - On the console: an FTP server on port 2121 (ftpsrv) and ShadowMount+ to register the
   title.
 - Your own PS3 firmware (`PS3UPDAT.PUP` from playstation.com) and your own game dumps.
