@@ -1,5 +1,7 @@
 # rpcs3-PS5
 
+[![Follow @_roberth_ on X](https://img.shields.io/badge/follow-%40__roberth__-000000?style=for-the-badge&logo=x&logoColor=white)](https://x.com/_roberth_)
+
 > [!CAUTION]
 > **EXPERIMENTAL. EXPECT CRASHES, FREEZES AND BROKEN GAMES.**
 >
