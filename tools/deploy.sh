@@ -4,7 +4,7 @@
 #   PS5_HOST=<console ip> (required), FTP_PORT (default 2121)
 set -euo pipefail
 root=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
-host=${PS5_HOST:?set PS5_HOST to the console's IP address}
+host=${PS5_HOST:?"set PS5_HOST to the console's IP address"}
 port=${FTP_PORT:-2121}
 title_id=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["titleId"])' "$root/title/sce_sys/param.json")
 app="$root/dist/$title_id"
