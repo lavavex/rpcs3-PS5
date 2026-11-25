@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Build PS5_Vulkan's RADV driver for the title: the PS5 shader compiler (psbc), the
-# ps5-opengl 0.3.0 adapter, Mesa's Vulkan runtime and the RADV release archive, plus
+# ps5-opengl 1.0.2 adapter, Mesa's Vulkan runtime and the RADV release archive, plus
 # the host tools a title needs (ps5-native-tool, the clean-room libc.prx).
 #
 # Expects deps/PS5_Vulkan, deps/PS5_Mesa, deps/PS5_PayloadSDK (tools/fetch-deps.sh).
@@ -19,15 +19,20 @@ fi
 export PS5VK_MAKO_PATH="$deps/pylib"
 export PYTHONPATH="$deps/pylib${PYTHONPATH:+:$PYTHONPATH}"
 
-# ps5-opengl SDK 0.3.0: the release bundle and its source tree (the compiler sources)
-release="$deps/ps5-opengl-sdk-0.3.0"
+# ps5-opengl SDK 1.0.2: the release bundle and its source tree (the compiler sources).
+# blackbearreloaded/ps5-opengl (the original source, and 0.3.0's release) is gone --
+# account deleted. darkxex/ps5-opengl mirrors the repository and re-uploaded the 1.0.2
+# release asset under the same SHA-256 GitHub recorded for it originally; there is no
+# earlier pin of that checksum to compare against, so this is trust-on-first-use in the
+# mirror, not independent verification. See PINS.md.
+release="$deps/ps5-opengl-sdk-1.0.2"
 if [[ ! -d $release ]]; then
-    step "ps5-opengl SDK 0.3.0"
-    archive="$deps/downloads/ps5-opengl-sdk-0.3.0.tar.gz"
+    step "ps5-opengl SDK 1.0.2"
+    archive="$deps/downloads/ps5-opengl-sdk-1.0.2.tar.gz"
     mkdir -p "$deps/downloads"
     [[ -f $archive ]] || curl --fail --location --retry 3 -o "$archive" \
-        https://github.com/blackbearreloaded/ps5-opengl/releases/download/v0.3.0/ps5-opengl-sdk-0.3.0.tar.gz
-    printf '%s  %s\n' a7bd6b85f00398eaf8d87ecc58fa0bde7cab79e065acc783268070d2f14b403c "$archive" |
+        https://github.com/darkxex/ps5-opengl/releases/download/v1.0.2/ps5-opengl-sdk-1.0.2.tar.gz
+    printf '%s  %s\n' 30d8e51dd062739b629346102be5932728ba714bc50b1bdcdf08306c8843d9a4 "$archive" |
         sha256sum --check --status || { echo "ps5-opengl archive digest mismatch" >&2; exit 1; }
     tar xzf "$archive" -C "$deps"
 fi
@@ -40,7 +45,7 @@ if [[ ! -d $src/third_party/opengnm-psbc ]]; then
 fi
 if [[ ! -f $src/third_party/opengnm-psbc/src/util/format/u_format_gen.h ]]; then
     # The 0.2.0-era layout PS5_Vulkan's build-psbc-ps5.sh expects carried the generated
-    # sources; a fresh 0.3.0 tree does not. Generate them with the SDK's own command list.
+    # sources; a fresh 1.0.2 tree does not. Generate them with the SDK's own command list.
     step "psbc generated sources"
     gen=$(mktemp)
     start=$(grep -n '^python3 src/util/format/u_format_table.py src/util/format/u_format.yaml --enums' \
@@ -61,7 +66,7 @@ if [[ ! -f .deps/native/psbc/PROVENANCE.txt ]]; then
     PS5_OPENGL_SDK="$src" bash tools/build-psbc-ps5.sh
 fi
 if [[ ! -d .deps/native/opengl-sdk/toolchain ]]; then
-    step "adapt ps5-opengl 0.3.0"
+    step "adapt ps5-opengl 1.0.2"
     bash tools/adapt-opengl-sdk.sh "$release"
 fi
 step "Mesa 26.2.0 sources"
